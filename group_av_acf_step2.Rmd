@@ -1,0 +1,50 @@
+
+```{r}
+packages <- c("tidyr", "stringr","data.table", "dplyr","stringi")
+if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+  install.packages(setdiff(packages, rownames(installed.packages())))  
+}
+lapply(packages, library, character.only = TRUE)
+options(digits=5)
+```
+
+#import individual ACF estimates from FX models
+```{r}
+
+dirs = list.files('/proj/telzerlab/NT_SPM12',  pattern="NT*", full.names = TRUE)
+dirs_2 = paste0(dirs, '/Shapes_Zero')
+file_list=lapply(dirs_2, list.files, pattern="*ACF.txt", full.names = TRUE)
+
+logs = list.files(dirs_2, pattern="*ACF.txt", full.names = TRUE)
+
+df.logs=lapply(logs, read.table) # read in the list of files
+df.logs_df=lapply(df.logs, data.frame) # combine the list into one dataframe
+
+file_list = list.files(fileDir, pattern="acf.txt",recursive=T)
+
+
+files <- purrr::map_df(df.logs_df, function(i) {
+  dplyr::summarise_all(i, mean)
+})
+
+
+```
+
+#import final subject list and limit ACF estimates to these subjects 
+```{r}
+included_subs <- read.csv('~/Desktop/included_subs.csv',header=T) #this is just a csv of two columns SID =subject ID, final_sample = 1,0 (1=yes, 0=no) 
+included_subs <- included_subs %>% filter(final_sample==1) #filter to just include subs you want to include
+files <- files %>% filter(sid %in% included_subs$SID) #limit FX models to final sub list (i.e. excluding those with bad motion)
+```
+
+# calculate group-level ACF summary
+```{r}
+summaryACF <- files %>% dplyr::group_by() %>%
+    dplyr::summarise(Xmean = mean(V6,na.rm=T),
+              Ymean = mean(V7,na.rm=T),
+              Zmean = mean(V8,na.rm=T),
+              Xmedian = median(V6,na.rm=T),
+              Ymedian = median(V7,na.rm=T),
+              Zmedian = median(V8,na.rm=T))
+write.csv(summaryACF, "summaryACF.csv")
+```
