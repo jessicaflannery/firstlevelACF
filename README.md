@@ -44,8 +44,11 @@ From AFNI
 ## WHY/WHATs of impacts on thresholds
 
 Things that can affect your cluster-extent threshold values from 3dclustim.
+
 -voxel smoothing (the size of your ACF parameters will give you a good ballpark of stringency)
+
 -voxel size (short hand- think larger voxel covers more space, small k needed)
+
 -relatedly, your mask. 
 
 See afni message board thred on this topic to better understand importance of accurate mask, not just for number of voxels you are covering, but the correct voxel dimensions: https://afni.nimh.nih.gov/afni/community/board/read.php?1,165851,166000#msg-166000
