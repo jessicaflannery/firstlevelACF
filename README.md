@@ -1,20 +1,23 @@
 # firstlevelACF
 scripts to calculate acd parameters on first level residuals up through 3dclustsim
 
-First script allows you to calculate acf parameters from individual residual files.
+1) First script allows you to calculate acf parameters from individual residual files.
 
-Second script then averages the acf parameters based on the individual calculations. This is where it is important to make sure only subs you want included with good data are included in that group average.
+2) Second script then averages the acf parameters based on the individual calculations. This is where it is important to make sure only subs you want included with good data are included in that group average.
 
 
-Third script is ensuring you have a group mask. This is very important! Don't ever run it without a mask- if it gives you values without a mask, it's completely false!
+3) Third script is ensuring you have a group mask. This is very important! Don't ever run it without a mask- if it gives you values without a mask, it's completely false!
 
-Forth script is just an example of your 3dclustsim script with those acf parameters added in.
+4) Forth script is just an example of your 3dclustsim script with those acf parameters added in.
 
-Hot tip! Since ACF parameters matter so much for thresholding, try to always include those values within your manuscript. 
+## NOTE for manuscripts:
+include ACF values used for 3dClustsin IN manuscript, noting obtained from first level residuals. 
+include voxel size
+--> between those two pieces of information, you should be able to quickly verify your own and have reviewers quickly verify if your values are within an expected range.
 
-*The WHYS*
+# *The WHYS*
 
-# WHY do you need to calculate first level?
+## WHY do you need to calculate first level?
 Going between SPM and afni, you MUST calculate acf parameters from first level model. It is not correct to calculate acf paramaters from group level residual files. This must be done at first level to get accurate cluster-level thresholding parameters.
 Can read up on this in our paper here including what should be reported in methods so others can quickly glance and have a good sense if your p/k ratio makes sense: https://www.sciencedirect.com/science/article/pii/S1878929320300554
 and our tutorial here: https://osf.io/y2nm8/ 
@@ -34,7 +37,7 @@ From AFNI
   *** mistake (such as using 3dFWHMx on the statistical maps from SPM)     ***
   *** that will render your cluster-level thresholding completely wrong!   ***
 
-# WHY/WHATs of impacts on thresholds
+## WHY/WHATs of impacts on thresholds
 
 Things that can affect your cluster-extent threshold values from 3dclustim.
 -voxel smoothing (the size of your ACF parameters will give you a good ballpark of stringency)
