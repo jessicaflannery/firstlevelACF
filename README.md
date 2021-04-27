@@ -11,9 +11,9 @@ scripts to calculate acd parameters on first level residuals up through 3dclusts
 4) Forth script is just an example of your 3dclustsim script with those acf parameters added in.
 
 ## NOTE for manuscripts:
-include ACF values used for 3dClustsin IN manuscript, noting obtained from first level residuals. 
-include voxel size
---> between those two pieces of information, you should be able to quickly verify your own and have reviewers quickly verify if your values are within an expected range.
+A) Include ACF values used for 3dClustsin IN manuscript, noting obtained from first level residuals. 
+B) Include voxel size.
+--> Between those two pieces of information, you should be able to quickly verify your own and have reviewers quickly verify if your values are within an expected range for P/K ratio.
 
 # *The WHYS*
 
