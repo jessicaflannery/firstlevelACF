@@ -21,8 +21,12 @@ B) Include voxel size.
 Going between SPM and afni, you MUST calculate acf parameters from first level model. It is not correct to calculate acf paramaters from group level residual files. This must be done at first level to get accurate cluster-level thresholding parameters.
 Can read up on this in our paper here including what should be reported in methods so others can quickly glance and have a good sense if your p/k ratio makes sense: https://www.sciencedirect.com/science/article/pii/S1878929320300554
 and our tutorial here: https://osf.io/y2nm8/ 
+
+
 see: https://afni.nimh.nih.gov/pub/dist/doc/program_help/3dFWHMx.html
+
 From AFNI 
+
   *** Do NOT use 3dFWHMx on the statistical results (e.g., '-bucket') from ***
   *** 3dDeconvolve or 3dREMLfit!!!  The function of 3dFWHMx is to estimate ***
   *** the smoothness of the time series NOISE, not of the statistics. This ***
